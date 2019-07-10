@@ -163,7 +163,7 @@ if __name__ == "__main__":
     print(f"Complex GCD of {z1} and {z2} is {complex_gcd(z1, z2)}")
 
     # primes
-    small_primes = primes(10000)
+    small_primes = primes(50000)
     print("First ten primes ", small_primes[:10])
 
     # check integer factorisation
