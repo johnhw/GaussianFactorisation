@@ -89,9 +89,8 @@ def complex_factor(a, primes, include_units=True):
         elif factor % 4 == 3:
             # x = 3 mod 4, remove two copies of this factor
             u = factor
-            factors.pop(
-                0
-            )  # remove repeated factor (note assumes factors are in order)!
+            # remove repeated factor (note assumes factors are in order)!
+            factors.pop(0)
         else:
             # x = 1 mod 4
             # find k, such that k^2 = -1 mod factor = (factor-1) mod factor
@@ -105,18 +104,18 @@ def complex_factor(a, primes, include_units=True):
             q = complex_round(a / trial_factor)
 
             # if exact, we have a factor
-            if norm(a - q * trial_factor) < 1e-6:  # epsilon tolerance
+            if norm(a - q * trial_factor) < 1e-6:
                 u = trial_factor
             else:
                 # otherwise it is the conjugate
-                u = trial_factor.imag + 1j * trial_factor.real  # conjugate
+                u = trial_factor.conjugate()
 
         # track the remaining number so we have the final unit factor
         a = a / u
         z_factors.append(complex_round(u))
 
     if include_units:
-        # we might have a factor of -1, 1j, or -1j -- append this two
+        # we might have a factor of -1, 1j, or -1j -- append this too
         return z_factors + [complex_round(a)]
     else:
         return z_factors
